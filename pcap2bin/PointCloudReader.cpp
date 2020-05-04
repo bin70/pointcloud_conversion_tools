@@ -143,7 +143,7 @@ bool PointCloudReader::isEnd()
    long long frameID = frameNumber - frameGap;
    consoleProgress(int(1.0 * frameID / reader1.totalFrame() * 76));
 
-   if (endFrameID > 0 && frameID >= endFrameID) // 到达用户指定的结束帧
+   if (endFrameID > 0 && frameID > endFrameID) // 到达用户指定的结束帧
    {
        endFlag = true;
        return endFlag;
@@ -471,7 +471,7 @@ bool PointCloudReader::isOutdoor()
    float sigmaSize = 0;
    std::vector<int> sizeIndices;
    if (endFrameID < 0)
-      endFrameID = getTotalFrame();
+      endFrameID = getTotalFrame()-1;
 
    for (long long i = startFrameID + 100; i < endFrameID - 50; i += 50)
    {
